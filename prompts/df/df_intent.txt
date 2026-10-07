@@ -1,0 +1,22 @@
+# ============================================================
+# VLM-DF - fixed per-type user intent (filled into {{USER_INTENT}}).
+#
+# One sentence per type, verbatim, shared by every image of that type and by
+# every method under test. The intent is part of the ruler: it is what the D
+# axis is measured against. Do not copy the instruction an arm happened to
+# receive here - that would give each arm its own ruler.
+# ============================================================
+### [[haze]] ###
+Please dehaze the image.
+
+### [[lowlight]] ###
+Please restore this low-quality image, recovering its normal brightness and clarity.
+
+### [[rain]] ###
+Please remove the rain from the image and restore its clarity.
+
+### [[snow]] ###
+Please remove the snow from the image and restore its clarity.
+
+### [[mix]] ###
+Restore this low-quality image to a clear, clean and natural state.

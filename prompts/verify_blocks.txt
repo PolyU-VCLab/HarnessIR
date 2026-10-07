@@ -1,0 +1,132 @@
+# ============================================================
+# Per-type task blocks for the verifier.
+#
+# Injected into verify.txt at {{TASK_BLOCK}}; the type
+# name goes to {{TASK_TYPE}}. Each block numbers its own items T1..Tn, so when
+# several types are combined the ids are namespaced with the type tag by
+# harness.stages.verify.build_verify_system.
+#
+# Each block is introduced by a delimited marker line naming its type; the
+# parser keys on that delimiter, so do not reformat it.
+# ============================================================
+### [[haze]] ###
+TASK: haze removal.
+
+T1  Haze removal thoroughness: in every region where content is identifiable
+    (including mid-ground and background elements that are still visible), haze is
+    removed as thoroughly as possible — visibility and contrast are substantially
+    recovered. A minimal, timid change is a FAILURE here; this task demands the
+    best achievable dehazing, not a cautious one.
+T2  Airlight veil eliminated: no residual whitish/greyish haze film remains over
+    objects that are visible. Check buildings, roads, edges and textures
+    specifically — a result that removed the bulk of the haze but left a milky
+    film on visible content fails this item.
+T3  Visible content reads clean and transparent, not washed-out: local contrast and
+    texture are restored in the de-hazed regions, and the picture again has genuine
+    blacks and genuine bright areas rather than everything compressed toward
+    mid-grey. NOTE (2026-09-09): the result may well come out DARKER overall than
+    the input — the haze was a bright white veil, and removing it removes that
+    brightness. Darker-but-with-restored-tonal-range is CORRECT here; do not record
+    it as a defect. What fails is the CONTENT staying pale and flat.
+T4  OBSCURED SKY UNCHANGED (hard): if the sky is obscured by haze in the input, it
+    stays obscured. It must NOT be turned into a clear blue sky with white clouds,
+    nor otherwise fabricated. Fabricating sky content is a severe failure.
+T5  Physical plausibility: dehazing has not produced impossible results — no
+    unnaturally black shadows, no colour banding in the sky, no dark halos around
+    edges, no localised "punched-through" patches.
+
+
+### [[lowlight]] ###
+TASK: low-light enhancement.
+
+T1  Enhancement strength: dark-region content is substantially more visible than in
+    the input. Clearly conservative, barely-brightened output is a FAILURE — this
+    task demands strong enhancement.
+T2  Shadow readability: detail that was present but buried in the shadows is now
+    readable. Structures in dark areas are resolved, not merely lifted to grey.
+T3  NIGHT ATMOSPHERE PRESERVED: the scene still reads as night or dusk. It must not
+    be converted into a daylight-looking image. Brightening for readability is
+    required; changing the time of day is a failure.
+T4  No hallucination in the darkest regions: areas that carry genuinely no
+    information in the input are left plausibly dark rather than filled with
+    invented detail.
+T5  Highlights preserved: light sources and bright areas are not blown out or
+    clipped by the enhancement.
+T6  No lifting artifacts: no grey-black "fog" from raising the black point, no
+    unnatural HDR look, no halos around light sources, no colour blotches in the
+    lifted shadows.
+T7  COLOUR IDENTITY PRESERVED: brightness and saturation depth may change as a
+    consequence of enhancement, but hue category must not shift — red objects stay
+    red, yellow lights stay yellow. A hue-category shift is a failure.
+
+
+### [[rain]] ###
+TASK: rainy-scene restoration.
+
+T1  Rain artifacts removed cleanly and as completely as reliably possible: visible
+    rain streaks and raindrop artifacts are gone from the content. Obvious residual
+    streaks or droplets on visible content are a FAILURE.
+T2  Rain haze veil removed: the misty veil that reduced contrast is eliminated and
+    visibility is recovered.
+T3  Background clarity actively restored: where rain caused defocus, blur or loss of
+    background clarity, the background is genuinely sharpened and made visible. A
+    result that removed the rain but left the background blurred FAILS this item —
+    de-raining alone is not sufficient.
+T4  RAINY AMBIANCE PRESERVED: the scene still reads as a rainy scene, with its wet
+    look and lighting mood. It must not be converted into a dry, sunny scene.
+T5  COLOUR AND TONE UNCHANGED: no hue shift, no saturation shift, no white-balance
+    change, no recolouring.
+T6  No ghosting or smearing where rain was removed; fine edges are not
+    over-smoothed in the process.
+
+
+### [[snow]] ###
+TASK: snowy-scene restoration.
+
+T1  Falling snow removed cleanly and as completely as possible: airborne
+    snowflakes and snow particles that occluded the view are gone. Obvious
+    residual flakes over visible content are a FAILURE.
+T2  Snow veil removed: the haze-like veil is eliminated and the occluded view is
+    restored, with balanced contrast recovered.
+T3  SETTLED SNOW IS CONTENT, NOT AN ARTIFACT: snow lying on the ground, roofs,
+    branches, vehicles or any surface is part of the scene and must remain exactly
+    as it is. Only airborne flakes and the atmospheric veil are to be removed.
+    Clearing away settled snow is a content violation and a severe failure.
+T4  No hallucination of what was hidden behind the flakes: uncovered areas are
+    reconstructed only where evidence supports it.
+T5  COLOUR AND TONE UNCHANGED: no hue shift, no white-balance shift, no
+    recolouring.
+T6  Global brightness character consistent with the input: clarity may improve, but
+    the overall brightness/mood is not restyled.
+T7  Edges and details recovered with balanced contrast; no harsh over-sharpening.
+
+
+### [[mix]] ###
+TASK: mixed realistic degradation — the general-purpose restoration case
+(noise / compression / blur, plus exposure and lighting artifacts).
+
+T1  Noise removed cleanly: sensor and read noise, and colour blotches, are
+    suppressed without oversmoothing texture away.
+T2  Compression artifacts removed: blocking, ringing and mosquito noise around
+    high-contrast edges are eliminated.
+T3  Blur resolved: the softness the CAPTURE introduced — defocus of the intended
+    subject, camera shake, general mush — is genuinely deblurred and detail
+    recovered, not merely masked by sharpening. Shallow depth-of-field background
+    blur is EXCLUDED: bokeh produced by the lens aperture is a property of the
+    photograph, and leaving it in place is correct, not a failure (2026-08-29).
+T4  Improvement is not confined to one spot: the degradations named above are
+    addressed wherever they occur, rather than only in the main subject while
+    comparably degraded areas elsewhere are left untouched. A background that
+    stays soft because it was shot out of focus does NOT fail this item.
+T5  Overexposure handled: where highlights are blown out, recoverable detail is
+    restored and the region no longer reads as a flat white patch. Detail that
+    carries no information in the input is not invented (see U2).
+T6  Reflections and glare reduced: specular reflections on glass or water, veiling
+    glare and light-source halos that obscure content are suppressed, and the
+    content behind them becomes readable where evidence supports it.
+T7  COLOUR CAST NOT CORRECTED: any colour cast in the input remains, at the same
+    strength. A cast may be intentional, so correcting it is out of scope here.
+    Colour and tone otherwise unchanged: no stylised recolouring, no hue category
+    shift, no white-balance change.
+T8  No hallucination in uncertain regions: heavily damaged areas are left
+    plausibly unresolved rather than invented.

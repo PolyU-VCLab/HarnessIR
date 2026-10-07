@@ -1,0 +1,18 @@
+# Core pipeline
+pillow>=9.1
+numpy>=1.24
+requests>=2.28
+opencv-python>=4.8
+
+# Stage 1 perception tools
+torch>=2.0
+torchvision>=0.15
+transformers>=4.40          # T3 depth: Depth-Anything-V2
+ultralytics>=8.3            # T4 segmentation: SAM3
+insightface>=0.7            # T2 faces: SCRFD
+onnxruntime>=1.16
+paddlepaddle-gpu>=3.0       # T1 OCR: PP-OCRv6 (the CPU build also works)
+paddleocr>=3.0
+
+# Scoring
+pyiqa>=0.1.12

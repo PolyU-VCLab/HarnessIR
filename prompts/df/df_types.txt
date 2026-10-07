@@ -1,0 +1,158 @@
+# ============================================================
+# VLM-DF - per-type criteria blocks (filled into df_core.txt at {{TASK_BLOCK}}).
+#
+# Each block has three fixed sections:
+#   D - SYMPTOMS TO REMOVE   what the D axis counts; nothing else counts
+#   D - NOT A SYMPTOM        things most easily mistaken for degradation for this
+#                            type (removing them is an F violation)
+#   F - PROTECTED (T*)       type-specific protected properties, numbered T1/T2/...
+#                            the universal P1-P6 items live in the core
+#   F - LICENSED CHANGES     large changes that are LEGITIMATE for this type.
+#                            Without this section the model penalises correct
+#                            dehazing or correct low-light lifting as content edits.
+#
+# The type numbering T1..Tn restarts in every block. When several types are
+# combined the ids get a type prefix (HAZE.T1) - see harness/dfscore.py.
+#
+# COLOUR RULES DIFFER BY TYPE: haze and lowlight license a colour change;
+# rain / snow / mix do not.
+#
+# Each block is introduced by a delimited marker line naming its type; the
+# parser keys on that delimiter, so do not reformat it.
+# ============================================================
+### [[haze]] ###
+TASK: haze removal.
+
+D — SYMPTOMS TO REMOVE
+  the atmospheric haze/fog that reduces visibility; the whitish or greyish
+  airlight film lying over objects that are visible (check buildings, roads,
+  edges and textures specifically — bulk haze gone but a milky film left on
+  visible content is residue); mid-ground and background content that the haze
+  made unreadable staying unreadable.
+
+D — NOT A SYMPTOM
+  the sky itself. Distance blur that is genuine aerial perspective at the far
+  horizon, where no content is identifiable.
+
+F — PROTECTED (type-specific)
+  T1  OBSCURED SKY UNCHANGED: if the sky is obscured by haze in Picture 1, it
+      stays obscured. Turning it into a clear blue sky, or into a sky with
+      fabricated clouds, is a fabrication — score F at 30 or below.
+  T2  No impossible physics introduced: no unnaturally black shadows, no colour
+      banding in the sky, no dark halos around edges, no localised
+      "punched-through" patches.
+
+F — LICENSED CHANGES (never a violation here)
+  Global colour, contrast and white balance MAY change — the haze was a bright
+  white veil, so removing it legitimately shifts colour and usually makes the
+  result DARKER overall. Darker-with-restored-tonal-range is correct. Recovering
+  mid-ground and background structure that the haze was hiding is the task
+  itself, not invented content.
+
+
+### [[lowlight]] ###
+TASK: low-light enhancement.
+
+D — SYMPTOMS TO REMOVE
+  underexposure — dark regions whose content cannot be read; detail that is
+  present in Picture 1 but buried in shadow; high-ISO noise and colour blotches
+  concentrated in the dark areas; weak local contrast in those areas.
+
+D — NOT A SYMPTOM
+  the night-time look itself. Deliberately dark areas that carry no information
+  at all (see T2).
+
+F — PROTECTED (type-specific)
+  T1  NIGHT ATMOSPHERE PRESERVED: the scene must still read as night or dusk.
+      Converting it into a daylight-looking image is a violation — score F at 30 or below.
+  T2  No hallucination in the darkest regions: areas carrying genuinely no
+      information in Picture 1 are left plausibly dark, not filled with invented
+      detail.
+  T3  HUE CATEGORY PRESERVED: red objects stay red, yellow lights stay yellow.
+      A hue-category shift is a violation.
+  T4  Highlights preserved: light sources and bright areas are not blown out or
+      clipped away by the enhancement.
+
+F — LICENSED CHANGES (never a violation here)
+  Global brightness and saturation depth MAY rise substantially — that is the
+  task. Strong enhancement is expected, not over-reach.
+
+
+### [[rain]] ###
+TASK: rainy-scene restoration.
+
+D — SYMPTOMS TO REMOVE
+  visible rain streaks; raindrop artifacts on the lens or on the scene; the rain
+  haze veil that reduced contrast; loss of background clarity caused by the rain
+  (background left blurred is residue — de-streaking alone is not enough).
+
+D — NOT A SYMPTOM
+  wetness: puddles, wet pavement, wet reflections, water on surfaces. Those are
+  scene content. Overcast lighting is content.
+
+F — PROTECTED (type-specific)
+  T1  RAINY AMBIANCE PRESERVED: the scene still reads as a rainy, wet scene with
+      its lighting mood. Converting it into a dry, sunny scene is a violation —
+      score F at 30 or below.
+  T2  COLOUR AND TONE UNCHANGED: no hue shift, no saturation shift, no
+      white-balance change, no recolouring. A global colour/tone change IS a
+      violation for this type.
+  T3  No ghosting or smearing where rain was removed; fine edges not
+      over-smoothed away in the process.
+
+F — LICENSED CHANGES (never a violation here)
+  Local contrast and clarity recovery where the rain veil was obscuring content.
+
+
+### [[snow]] ###
+TASK: snowy-scene restoration.
+
+D — SYMPTOMS TO REMOVE
+  airborne snowflakes and snow particles occluding the view; the haze-like snow
+  veil that flattened contrast.
+
+D — NOT A SYMPTOM
+  SETTLED SNOW. Snow lying on the ground, on roofs, on branches, on vehicles or
+  on any surface is scene content, not an artifact. See T1.
+
+F — PROTECTED (type-specific)
+  T1  SETTLED SNOW IS CONTENT: snow resting on any surface must remain exactly as
+      it is. Clearing it away is a content violation — score F at 30 or below.
+  T2  COLOUR AND TONE UNCHANGED: no hue shift, no white-balance shift, no
+      recolouring. A global colour change IS a violation for this type.
+  T3  Overall brightness character consistent with Picture 1 — clarity may
+      improve, but the mood is not restyled.
+  T4  No hallucination of what was hidden behind the flakes: uncovered areas are
+      reconstructed only where evidence supports it.
+
+F — LICENSED CHANGES (never a violation here)
+  Contrast and clarity recovery in the regions the veil was covering.
+
+
+### [[mix]] ###
+TASK: mixed realistic degradation — the general-purpose case (noise /
+compression / blur, plus exposure and lighting artifacts).
+
+D — SYMPTOMS TO REMOVE
+  sensor and read noise, and colour blotches; compression artifacts — blocking,
+  ringing, mosquito noise around high-contrast edges; the softness the CAPTURE
+  introduced — defocus of the intended subject, camera shake, general mush;
+  blown-out highlights where recoverable detail is buried; veiling glare and
+  specular reflections on glass or water that obscure content.
+
+D — NOT A SYMPTOM
+  SHALLOW DEPTH OF FIELD. A background left soft by the lens aperture is a
+  property of the photograph; leaving it soft is correct. Do not count bokeh as
+  residual blur. Any colour cast in Picture 1 is also not a symptom — see T1.
+
+F — PROTECTED (type-specific)
+  T1  COLOUR CAST NOT CORRECTED: any colour cast in Picture 1 remains, at the
+      same strength. A cast may be intentional, so correcting it is out of scope
+      and IS a violation for this type.
+  T2  No stylised recolouring, no hue-category shift, no white-balance change.
+  T3  Bokeh preserved: an out-of-focus background is not sharpened into focus.
+  T4  No hallucination in uncertain regions: heavily damaged areas are left
+      plausibly unresolved rather than invented.
+
+F — LICENSED CHANGES (never a violation here)
+  Denoising, deblocking, deblurring of capture blur, and local contrast recovery.

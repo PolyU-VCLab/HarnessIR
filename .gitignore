@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Run outputs
+runs/
+*.log
+
+# Model weights (download separately; see README "Configuration")
+checkpoints/
+*.pt
+*.pth
+*.onnx
+*.safetensors
+
+# Local configuration
+.env
+*.local.json

@@ -1,0 +1,33 @@
+{
+  "name": "harness",
+  "note": "",
+  "vlm_backend": "gemini",
+  "vlm_model": "gemini-3.7-flash",
+  "mfm_backend": "nb2",
+  "vlm_max_output_tokens": 16384,
+  "enable_tools": true,
+  "enable_redo": false,
+  "max_rounds": 3,
+  "enable_iqa": true,
+  "nr_metrics": [
+    "MANIQA",
+    "CLIPIQA",
+    "MUSIQ",
+    "TOPIQ",
+    "AFINE_NR"
+  ],
+  "fr_metrics": [
+    "PSNR",
+    "SSIM",
+    "LPIPS",
+    "DISTS"
+  ],
+  "workers": 4,
+  "resume": true,
+  "square1024": true,
+  "depth_picture_style": "gray",
+  "user_intent": null,
+  "color_adjust": true,
+  "redo_stop": "verifier",
+  "redo_select": "verifier"
+}

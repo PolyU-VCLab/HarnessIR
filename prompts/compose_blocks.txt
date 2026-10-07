@@ -1,0 +1,165 @@
+# ============================================================
+# Per-type task blocks for the composer.
+#
+# Injected into compose.txt at {{TASK_BLOCK}}; the type name goes to
+# {{TASK_TYPE}}. Each block is introduced by a delimited marker line naming
+# its type; the parser keys on that delimiter, so do not reformat it.
+# ============================================================
+### [[haze]] ###
+TASK-SPECIFIC GOAL: haze removal.
+
+STATE THE TARGET AS A CHECKABLE END STATE, NOT AS AN ADVERB (2026-08-30).
+Writing "aggressive"/"thorough"/"maximal" does not make the editor act more
+strongly — measured across 100 images, instructions loaded with such words
+produced no more change than instructions without them. What works is telling
+the editor what the finished picture must LOOK like, so it can check itself.
+Put these end states in the instruction, in concrete terms tied to this image:
+
+  * NO WHITE FILM ANYWHERE. After restoration there is no milky/greyish layer
+    sitting over any surface. A viewer comparing input and output must be able to
+    say the veil is gone, not merely reduced. Name the surfaces it currently sits
+    on in this image.
+  * DISTANT CONTENT AS LEGIBLE AS NEAR CONTENT. Edges, textures and boundaries of
+    mid-ground and background objects must be as clearly readable as foreground
+    ones — not "improved", but actually resolvable. Name the distant objects.
+  * THE CONTENT COMES OUT MORE VIVID, NOT WASHED OUT. Haze desaturates and flattens
+    everything toward pale grey; the restored surfaces must show their own real
+    colours at full strength and their own light-to-dark variation. A result that
+    is merely a slightly cleaner version of the same pale image has failed.
+    (The overall picture may well end up darker than the input — that is correct,
+    because the bright white veil is being removed. What must not happen is the
+    CONTENT staying pale and flat.)
+  * FULL TONAL RANGE RESTORED. The haze has compressed everything toward mid-grey;
+    the output should again have genuine blacks and genuine bright areas rather
+    than a flat mid-tone image.
+
+MUST NOT (state explicitly in the instruction):
+  * If the sky is obscured by haze, it stays unchanged. It must NOT be turned into
+    a clear blue sky with white clouds, nor otherwise fabricated. Name the sky's
+    actual current state from the report when writing this.
+  * No artifacts from aggressive dehazing: no unnaturally black shadows, no colour
+    banding in the sky, no dark halos around edges, no localised punched-through
+    patches. These remain hard limits — the strength above is about removing the
+    veil completely, never about pushing contrast until it breaks.
+
+NOTE ON COLOUR: this is the one task type where colour and brightness necessarily
+change — recovering contrast and transparency alters them. Do not impose a
+"colour must stay identical" requirement here. Still avoid stylised recolouring.
+
+
+### [[lowlight]] ###
+TASK-SPECIFIC GOAL: low-light enhancement.
+
+STATE THE TARGET AS A CHECKABLE END STATE, NOT AS AN ADVERB (2026-08-30).
+"STRONGER"/"not conservative" did not produce stronger results — measured over
+100 images the dark regions were lifted by almost nothing. Describe what the
+finished picture must LOOK like instead:
+
+  * DARK CONTENT BECOMES READABLE AT NORMAL VIEWING. Objects currently lost in the
+    shadows must be identifiable without zooming in or adjusting a display. Name
+    the specific dark regions in this image and what is in them.
+  * NO REGION STAYS A FEATURELESS BLACK MASS. Areas that hold recoverable
+    structure must show that structure — shapes, edges and surfaces separable from
+    one another rather than a single flat dark patch. (Areas genuinely holding no
+    information stay dark; see MUST NOT.)
+  * SHADOW DETAIL, NOT JUST A BRIGHTER PICTURE. The lift must open up the shadows
+    specifically. Uniformly raising the whole image, which washes it out while
+    leaving the shadows just as closed, is a failure of this task.
+  * THE LIFT IS SUBSTANTIAL AND VISIBLE. Comparing input and output, a viewer must
+    immediately see that dark areas opened up. A change only detectable by
+    measurement is under-enhancement.
+  * Suppression of the noise and colour blotches that the lift will reveal, and
+    clarity/sharpness recovery for the newly visible structures, without
+    oversmoothing them away.
+
+MUST NOT (state explicitly):
+  * Realistic night/dusk atmosphere must be preserved — the scene must still read
+    as night or dusk, never converted to a daylight look. Opening the shadows is
+    not the same as making the picture look like day: the bright/dark relationship
+    of the scene stays intact.
+  * No hallucinated detail in severely dark or uncertain regions; leave them
+    plausibly dark instead.
+  * Highlights preserved: no over-exposure or clipping of light sources.
+  * No grey-black lifting artifacts, no unnatural HDR look, no halos around lights.
+    These remain hard limits — the strength above is about opening the shadows,
+    never about pushing until the image looks tone-mapped.
+  * COLOUR IDENTITY: brightness and saturation depth may change as a consequence of
+    enhancement, but hue category must not shift — red objects stay red, yellow
+    lights stay yellow.
+
+
+### [[rain]] ###
+TASK-SPECIFIC GOAL: rainy-scene restoration.
+
+Require in the instruction:
+  * Clean and complete removal of visible rain streaks, raindrop artifacts and the
+    rain haze veil, as thoroughly as can be done reliably — no obvious residual
+    rain artifacts left on visible content.
+  * If rain streaks/droplets caused background defocus, blur or reduced background
+    clarity: ACTIVE restoration of background sharpness and visibility. Removing
+    the rain while leaving the background blurred is not acceptable — say so.
+  * Recovery of contrast, visibility and textures.
+  * Denoising and clarity/sharpness recovery for ALL regions, not only rain removal.
+
+MUST NOT (state explicitly):
+  * Rainy weather ambiance and lighting mood are preserved — the scene must not
+    look dry or sunny. Wet-surface cues present in the image stay.
+  * Colour and overall tone unchanged: no hue shift, no saturation shift, no
+    white-balance change, no recolouring.
+  * No ghosting or smearing where rain was removed; no over-smoothing of fine edges.
+
+
+### [[snow]] ###
+TASK-SPECIFIC GOAL: snowy-scene restoration.
+
+Require in the instruction:
+  * Clean and as-complete-as-possible removal of snow artifacts that OCCLUDE the
+    view: airborne snowflakes and snow particles in the air, and the haze-like snow
+    veil. Name where visibility is most impaired.
+  * Denoising and clarity/sharpness recovery for ALL regions, not only snow
+    suppression.
+  * Recovery of edges, details and balanced contrast, without harsh oversharpening.
+
+MUST NOT (state explicitly):
+  * SETTLED SNOW IS SCENE CONTENT: snow lying on the ground, roofs, branches,
+    vehicles or any other surface must remain exactly as it is. Only airborne
+    flakes and the atmospheric veil are removed. Name the settled snow present in
+    this image so it is unambiguous.
+  * No hallucination of what was hidden behind the flakes.
+  * Global colour and overall tone unchanged: no hue shift, no white-balance shift,
+    no recolouring.
+  * Global brightness character stays consistent with the input while clarity
+    improves.
+
+
+### [[mix]] ###
+TASK-SPECIFIC GOAL: mixed realistic degradation — the general-purpose restoration
+case (noise / compression / blur, plus exposure and lighting artifacts).
+
+Require in the instruction:
+  * Fidelity first: exact scene content, geometry, position and structure preserved.
+  * Clean removal of noise and compression artifacts — sensor/read noise, colour
+    blotches, blocking, ringing, mosquito noise around high-contrast edges — and
+    genuine recovery of detail and clarity for visible structures.
+  * Genuine deblurring of the softness the CAPTURE introduced — defocus of the
+    intended subject, camera shake, general mush — with detail recovered rather than
+    masked by sharpening. Shallow depth-of-field blur is NOT in that set: background
+    bokeh produced by the lens aperture is a property of the photograph and stays as
+    it is (2026-08-29 change).
+  * Clarity improvement where the image is degraded. Name the regions where each
+    degradation is worst. Do not require that every region reach the same sharpness —
+    a correctly restored photograph may still have an out-of-focus background.
+  * Where highlights are blown out: recovery of the detail that is still
+    recoverable, so the region no longer reads as a flat white patch.
+  * Where specular reflections (on glass or water), veiling glare or light-source
+    halos obscure content: suppression of them and recovery of the content behind,
+    to the extent the input supports it. Name where they are.
+
+MUST NOT (state explicitly):
+  * COLOUR CAST IS NOT CORRECTED: if the image carries a colour cast, it stays at
+    the same strength — the cast may be intentional. Global colour and overall tone
+    otherwise unchanged: no stylised recolouring, no hue category shift, no
+    white-balance change.
+  * No invented objects: do not add, remove or replace things that are not in the
+    input.
+  * No oversmoothing that erases genuine texture along with the noise.

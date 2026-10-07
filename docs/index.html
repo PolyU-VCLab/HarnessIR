@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HarnessIR: Harnessing Multimodal Foundation Models for Universal Real-World Image Restoration">
+  <title>HarnessIR | PolyU VCLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="float-nav" aria-label="Section navigation">
+    <a href="#top" data-section="top">Top</a>
+    <a href="#abstract" data-section="abstract">Abstract</a>
+    <a href="#method" data-section="method">Method</a>
+    <a href="#results" data-section="results">Results</a>
+    <div class="sub">
+      <a href="#mio100" data-section="mio100">MiO100</a>
+      <a href="#real-paired" data-section="real-paired">Real-Paired-200</a>
+      <a href="#real-nogt" data-section="real-nogt">Real-NoGT-200</a>
+      <a href="#visual" data-section="visual">Visual Results</a>
+    </div>
+    <a href="#citation" data-section="citation">Citation</a>
+  </nav>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logos">
+        <a href="https://www.polyu.edu.hk/" target="_blank" rel="noopener">
+          <img src="static/images/polyu-logo.png" alt="PolyU">
+        </a>
+        <a href="https://www4.comp.polyu.edu.hk/~cslzhang/" target="_blank" rel="noopener">
+          <img src="static/images/vclab-logo.jpg" alt="VCLab">
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="container">
+        <h1 class="hero-title">
+          <span class="hero-title-main">HarnessIR</span>
+          <span class="hero-title-sub">Harnessing Multimodal Foundation Models for Universal Real-World Image Restoration</span>
+        </h1>
+        <p class="tagline nowrap-line">Restoration by instructing an MFM executor, not by scheduling restoration tools.</p>
+
+        <p class="authors">
+          <a href="https://scholar.google.com/citations?user=lueNzSgAAAAJ" target="_blank" rel="noopener">Xiangtao Kong</a><sup>1,2</sup>,
+          <a href="https://scholar.google.com/citations?user=wzdCc-QAAAAJ" target="_blank" rel="noopener">Shuaizheng Liu</a><sup>1,2</sup>,
+          <a href="https://scholar.google.com/citations?user=A-U8zE8AAAAJ" target="_blank" rel="noopener">Rongyuan Wu</a><sup>1,2</sup>,
+          <a href="https://scholar.google.com/citations?user=ZCDjTn8AAAAJ" target="_blank" rel="noopener">Lingchen Sun</a><sup>1,2</sup>,
+          <a href="https://scholar.google.com/citations?user=UX26wSMAAAAJ" target="_blank" rel="noopener">Zhengqiang Zhang</a><sup>1,2</sup>,
+          <a href="https://scholar.google.com/citations?user=0Z89rfUAAAAJ" target="_blank" rel="noopener">Jinxin Zhao</a><sup>1,2</sup>,
+          <a href="https://scholar.google.com/citations?user=Qt4WlSkAAAAJ" target="_blank" rel="noopener">Yuhui Wu</a><sup>1,2</sup>,
+          <a href="https://www4.comp.polyu.edu.hk/~cslzhang/" target="_blank" rel="noopener">Lei Zhang</a><sup>1,2,&dagger;</sup>
+        </p>
+        <p class="affiliations">
+          <sup>1</sup> The Hong Kong Polytechnic University &middot; <sup>2</sup> OPPO Research Institute
+        </p>
+        <p class="notes"><sup>&dagger;</sup> Corresponding author</p>
+
+        <div class="badges">
+          <!-- TODO: fill in the arXiv id -->
+          <a class="badge" href="https://arxiv.org/abs/TODO" target="_blank" rel="noopener">Paper</a>
+          <a class="badge" href="https://github.com/PolyU-VCLab/HarnessIR" target="_blank" rel="noopener">Code</a>
+          <a class="badge" href="https://huggingface.co/datasets/VCLab-PolyU/HarnessIR/tree/main" target="_blank" rel="noopener">HuggingFace</a>
+          <a class="badge" href="https://pan.baidu.com/s/1CIGdo-hMLsedI-Q0yUT-Iw?pwd=ngjt" target="_blank" rel="noopener">Baidu Disk</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase -->
+    <section class="showcase">
+      <div class="container">
+        <figure class="showcase-fig">
+          <img src="static/images/teaser.png" alt="HarnessIR teaser">
+        </figure>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="highlights" id="highlights">
+      <div class="container">
+        <p class="section-label">Highlights</p>
+        <h2 class="section-title">Key Takeaways</h2>
+        <div class="highlight-grid">
+          <article class="highlight-card">
+            <h3>MFM as the Executor</h3>
+            <p>No restoration tool is scheduled. A single MFM call performs the restoration; the harness decides what to tell it.</p>
+          </article>
+          <article class="highlight-card">
+            <h3>Tools as Evidence</h3>
+            <p>OCR, face detection, depth and segmentation provide evidence for writing the instruction, not links in a restoration chain.</p>
+          </article>
+          <article class="highlight-card">
+            <h3>Redo, Not Repair</h3>
+            <p>A failed result is never propagated. The revised instruction is applied to the original LQ image.</p>
+          </article>
+          <article class="highlight-card">
+            <h3>Training-Free</h3>
+            <p>Inference-only, using off-the-shelf VLM and image editing APIs. No component is trained or fine-tuned.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Abstract -->
+    <section id="abstract">
+      <div class="container">
+        <p class="section-label">Abstract</p>
+        <h2 class="section-title">Abstract</h2>
+        <div class="abstract-box">
+          <p>
+            Real-world low-quality images suffer from complex mixed degradations, including but not limited to noise,
+            blur, atmospheric effects, etc. Recent agentic methods usually model real-world image restoration
+            (Real-IR) as a sequential tool calling problem over task-specific single-degradation restoration models.
+            This paradigm, however, is fundamentally limited because complex real-world degradations cannot be
+            cleanly undone degradation by degradation, and the tool used for task-specific models caps the capability
+            of the agent system. In this work, we present <strong>HarnessIR</strong>, an agentic framework for Real-IR
+            by harnessing a multimodal foundation model (MFM) as the executor. HarnessIR consists of five stages:
+            perception and diagnosis, on-demand tool invocation, prompt composition, execution, and
+            verification-driven refinement. Unlike prior agentic Real-IR methods that rely on tool chains assembled
+            from task-specific models, HarnessIR feeds the restoration requirements, the perceptual diagnosis, and the
+            evidence into an MFM that performs restoration in a single pass, followed by verification stages to
+            determine whether the result warrants further processing. Under our harness, off-the-shelf MFMs handle
+            restoration tasks remarkably well, achieving state-of-the-art results on the widely used MiO100 synthetic
+            benchmark. More importantly, by exploiting the strong generalization ability of MFMs, HarnessIR delivers
+            compelling restoration quality on challenging real-world scenes where previous agentic IR systems often
+            struggle.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Method -->
+    <section id="method">
+      <div class="container">
+        <p class="section-label">Method</p>
+        <h2 class="section-title">HarnessIR Pipeline</h2>
+
+        <figure class="pipeline-fig">
+          <img src="static/images/pipeline.png" alt="HarnessIR pipeline">
+        </figure>
+
+        <p class="section-lead">
+          Prior agentic IR methods apply task-specific restoration models in sequence, and are therefore bounded by
+          those tools. HarnessIR keeps one MFM as the executor and varies only the instruction given to it.
+        </p>
+
+        <ol class="step-list">
+          <li><strong>Perception and diagnosis</strong> &mdash; a VLM reads the content and its degradations, and names which auxiliary tools to consult.</li>
+          <li><strong>On-demand tool invocation</strong> &mdash; only the planned tools run, returning image-specific evidence.</li>
+          <li><strong>Prompt composition</strong> &mdash; the evidence is woven into one instruction saying what to treat and what must survive untouched.</li>
+          <li><strong>Execution</strong> &mdash; the MFM receives the LQ image and that instruction, in a single pass.</li>
+          <li><strong>Verification-driven refinement</strong> &mdash; the result is judged, and re-executed from the LQ input only if it fails.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section id="results">
+      <div class="container">
+        <p class="section-label">Experiments</p>
+        <h2 class="section-title">Results</h2>
+        <p class="section-lead">
+          HarnessIR is run with two executors under the identical harness &mdash; <strong>Nano Banana 2</strong> and
+          <strong>GPT-Image-2.5-Sunburst</strong> &mdash; and compared against their direct-use baselines, all-in-one
+          models and prior agentic IR methods.
+        </p>
+
+        <h3 class="block-heading" id="metrics">Evaluation Protocol and Metrics</h3>
+        <p class="compact">
+          Following prior works, we measure fidelity with full-reference (PSNR, SSIM, LPIPS, DISTS) metrics and image
+          quality with no-reference (MANIQA, CLIP-IQA, MUSIQ, TOPIQ, AFINE-NR) metrics. Since a higher NR-IQA score
+          does not by itself indicate better restoration &mdash; a model that repaints text or fabricates structure
+          can still outscore its own ground truth &mdash; we report the absolute deviation <strong>&Delta;</strong>
+          from the GT score whenever a GT exists, and additionally use an independent VLM evaluator reporting
+          <strong>D-Score</strong> for degradation removal and <strong>F-Score</strong> for content preservation
+          (both 0&ndash;100), combined as their per-image geometric mean, <strong>DF-Score</strong>.
+        </p>
+        <figure class="inline-fig">
+          <img src="static/images/df_motivation.png" alt="NR-IQA rewards altered content">
+        </figure>
+
+        <h3 class="block-heading" id="mio100">MiO100</h3>
+        <p class="compact">
+          On the synthetic mixed-degradation benchmark, HarnessIR-NB2 and HarnessIR-GPT gain <strong>+1.40</strong> and
+          <strong>+1.75 dB</strong> PSNR over their direct-use baselines, plus <strong>+4.1</strong> and
+          <strong>+18.1</strong> DF-Score points, mainly through better content preservation.
+        </p>
+        <figure class="inline-fig">
+          <img src="static/images/MiO_table.png" alt="Results on MiO100">
+        </figure>
+
+        <h3 class="block-heading" id="real-paired">Real-Paired-200</h3>
+        <p class="compact">
+          On real-world images with paired ground truth, HarnessIR-NB2 reaches <strong>26.63 dB</strong> PSNR and a
+          DF-Score of <strong>62.0</strong>, while HarnessIR-GPT improves PSNR by <strong>+2.87 dB</strong> and lifts
+          its DF-Score from 40.1 to <strong>60.2</strong>. Both exceed the previous best DF-Score of 38.8.
+        </p>
+        <figure class="inline-fig">
+          <img src="static/images/RP200_table.png" alt="Results on Real-Paired-200">
+        </figure>
+
+        <h3 class="block-heading" id="real-nogt">Real-NoGT-200</h3>
+        <p class="compact">
+          On real-world images without ground truth, HarnessIR yields DF-Scores of <strong>62.9</strong> for NB2 and
+          <strong>49.3</strong> for GPT-Image-2.5, well above the best prior result of 32.0. NR-IQA alone cannot rank
+          these methods, as it rewards hallucinated detail even when the content has been altered.
+        </p>
+        <figure class="inline-fig">
+          <img src="static/images/RN200_table.png" alt="Results on Real-NoGT-200">
+        </figure>
+
+        <h3 class="block-heading" id="visual">Visual Results</h3>
+        <figure class="inline-fig">
+          <img src="static/images/mainvisual.png" alt="Visual comparisons on three test sets">
+          <figcaption>Visual comparisons on the three test sets.</figcaption>
+        </figure>
+        <figure class="inline-fig">
+          <img src="static/images/appvisual.png" alt="Additional visual comparisons">
+          <figcaption>Additional visual comparisons.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <section id="citation">
+      <div class="container">
+        <p class="section-label">BibTeX</p>
+        <h2 class="section-title">Citation</h2>
+        <div class="bibtex-wrap">
+          <button type="button" class="copy-btn" id="copy-bibtex">Copy</button>
+          <pre id="bibtex-content">% TODO: add the HarnessIR BibTeX entry</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      &copy; 2026 <a href="https://polyu-vclab.github.io/" target="_blank" rel="noopener">PolyU VCLab</a>
+      &middot; <a href="mailto:cslzhang@comp.polyu.edu.hk">cslzhang@comp.polyu.edu.hk</a>
+    </p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
