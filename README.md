@@ -229,7 +229,7 @@ All four entry points read the same manifest &mdash; a JSON array, or JSONL with
 | --- | --- | --- |
 | `lq` | yes | the degraded input image |
 | `gt` | no | ground truth; only the full-reference metrics need it |
-| `type` | no | the degradation present in this image &mdash; what the restoration is asked to remove |
+| `type` | no | what the restoration is asked to remove |
 | `prompt` | no | the restoration request for this image; both paths take it as input |
 
 A request may be written per image (`prompt`), or once for the whole run with `--intent`, which takes precedence.
