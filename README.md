@@ -4,9 +4,9 @@
 
 <p align="center"><i>Restoration by harnessing an MFM executor, not by scheduling restoration tools.</i></p>
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b.svg)](https://arxiv.org/abs/TODO)
-[![HarnessIR-HuggingFace](https://img.shields.io/badge/HarnessIR-HuggingFace-FCC624.svg)](https://huggingface.co/datasets/VCLab-PolyU/HarnessIR/tree/main)
-[![HarnessIR-BaiduDisk](https://img.shields.io/badge/HarnessIR-BaiduDisk-0EA5E9.svg)](https://pan.baidu.com/s/1CIGdo-hMLsedI-Q0yUT-Iw?pwd=ngjt)
+[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b.svg)](https://arxiv.org/abs/2610.10133)
+[![HarnessIR-HuggingFace](https://img.shields.io/badge/Data&Results-HuggingFace-FCC624.svg)](https://huggingface.co/datasets/VCLab-PolyU/HarnessIR/tree/main)
+[![HarnessIR-BaiduDisk](https://img.shields.io/badge/Data&Results-BaiduDisk-0EA5E9.svg)](https://pan.baidu.com/s/1CIGdo-hMLsedI-Q0yUT-Iw?pwd=ngjt)
 [![ProjectPage](https://img.shields.io/badge/Project-Page-8F1329.svg)](https://polyu-vclab.github.io/HarnessIR/)
 
 [Xiangtao Kong](https://scholar.google.com/citations?user=lueNzSgAAAAJ)<sup>1,2</sup> |
