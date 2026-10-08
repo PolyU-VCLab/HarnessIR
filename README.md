@@ -83,7 +83,7 @@ Two choices distinguish it from prior pipelines: **no restoration tool is schedu
 
 Fidelity is measured with full-reference metrics (PSNR, SSIM, LPIPS, DISTS) and image quality with no-reference metrics (MANIQA, CLIP-IQA, MUSIQ, TOPIQ, AFINE-NR).
 
-A higher NR-IQA score does not by itself indicate better restoration: a model that repaints text or fabricates structure can still outscore its own ground truth. We therefore also report an independent VLM evaluator, giving **D-Score** for degradation removal and **F-Score** for content preservation (both 0&ndash;100), combined as their per-image geometric mean, **DF-Score** &mdash; taken per image and then averaged, so one image's strong D-Score cannot offset another image's broken F-Score:
+A higher NR-IQA score does not by itself indicate better restoration: a model that repaints text or fabricates structure can still outscore its own ground truth. Therefore, for images with GT, we calculate the absolute difference between their NR-IQA scores and those of the corresponding GT images. We also report an independent VLM evaluator, giving **D-Score** for degradation removal and **F-Score** for content preservation (both 0&ndash;100), combined as their per-image geometric mean, **DF-Score** &mdash; taken per image and then averaged, so one image's strong D-Score cannot offset another image's broken F-Score:
 
 $$\mathrm{DF\text{-}Score} = \frac{1}{N}\sum_{i=1}^{N}\sqrt{D_i \cdot F_i}$$
 
