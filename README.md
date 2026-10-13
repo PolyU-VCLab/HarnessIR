@@ -14,7 +14,7 @@
 [Rongyuan Wu](https://scholar.google.com/citations?user=A-U8zE8AAAAJ)<sup>1,2</sup> |
 [Lingchen Sun](https://scholar.google.com/citations?user=ZCDjTn8AAAAJ)<sup>1,2</sup> |
 [Zhengqiang Zhang](https://scholar.google.com/citations?user=UX26wSMAAAAJ)<sup>1,2</sup> |
-[Jinxin Zhao](https://scholar.google.com/citations?user=0Z89rfUAAAAJ)<sup>1,2</sup> |
+[Jixin Zhao](https://scholar.google.com/citations?user=0Z89rfUAAAAJ)<sup>1,2</sup> |
 [Yuhui Wu](https://scholar.google.com/citations?user=Qt4WlSkAAAAJ)<sup>1,2</sup> |
 [Lei Zhang](https://www4.comp.polyu.edu.hk/~cslzhang/)<sup>1,2,&dagger;</sup>
 
