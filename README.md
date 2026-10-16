@@ -310,9 +310,12 @@ If you have any questions, please feel free to contact: `xiangtao.kong@connect.p
 <a id="citation"></a>
 ## &#x1F4DA; Citation
 
+```
 @article{kong2026harnessir,
   title={HarnessIR: Harnessing Multimodal Foundation Models for Universal Real-World Image Restoration},
   author={Kong, Xiangtao and Liu, Shuaizheng and Wu, Rongyuan and Sun, Lingchen and Zhang, Zhengqiang and Zhao, Jinxin and Wu, Yuhui and Zhang, Lei},
   journal={arXiv preprint arXiv:2610.10133},
   year={2026}
 }
+```
+
